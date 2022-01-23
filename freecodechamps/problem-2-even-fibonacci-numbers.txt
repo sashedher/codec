@@ -1,0 +1,14 @@
+function fiboEvenSum(n) {
+  // You can do it!
+ var a=1,b=2,c=0,s=2;
+  while(c<=n){
+   c=a+b;
+   if(c%2==0)
+    s+=c;
+  a=b;
+  b=c;
+  }
+  return s;
+}
+
+fiboEvenSum(10);

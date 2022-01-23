@@ -1,0 +1,5 @@
+# ignore binary files
+*.exe
+
+#git rm --cached filename   									->to remove staged file
+#git config --global core.excludesfile ~/.gitignore_global  	-> adding .gitignore to global config 
