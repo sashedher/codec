@@ -1,4 +1,5 @@
-// https://codeforces.com/contest/1629/problem/A  Inprocess
+// https://codeforces.com/contest/1629/problem/A  solved
+
 #include<bits/stdc++.h>
 using namespace std;
 
