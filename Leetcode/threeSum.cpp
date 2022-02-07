@@ -7,33 +7,22 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums){
         multimap<int,int> op;
-        vector<vector<int>> res(0);
         int k=0;
         for(int i=0;i<nums.size();i++){
             op.insert({nums[i],i});
         }
+        set<multiset<int>> s;
         for(int i=0;i<nums.size()-1;i++){
             for(int j=i+1;j<nums.size();j++){
+                multiset<int> t;
                 auto itr=op.upper_bound(-nums[i]-nums[j]);
                     *itr--;
                 if(itr->second+1 < op.size() && j < itr->second ){
-                    
-               res.push_back({nums[i],nums[j],nums[itr->second]});
-                k++;    
+                   t.insert({nums[i],nums[j],nums[itr->second]});
+                   s.insert(t); 
+                }     
             }
-                
-            }
-            
         }
-        set<set<int>> s;
-        for(auto itr=res.begin();itr!=res.end();itr++){
-            set<int> t;
-            for(auto itr1=itr->begin();itr1!=itr->end();itr1++){
-                t.insert(*itr1);
-            }
-            s.insert(t);    
-        }
-        // res.erase(res.begin(),res.end());
         vector<vector<int>> ans(0);
         for(auto itr=s.begin();itr!=s.end();itr++){
             vector<int> t;
