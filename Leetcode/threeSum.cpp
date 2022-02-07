@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/3sum/
+// https://leetcode.com/problems/3sum/ -not done (remove duplicates)
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -6,26 +6,43 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums){
-        map<int,int> op;
+        multimap<int,int> op;
         vector<vector<int>> res(0);
         int k=0;
         for(int i=0;i<nums.size();i++){
             op.insert({nums[i],i});
         }
-        for(int i=0;i<nums.size();i++){
+        for(int i=0;i<nums.size()-1;i++){
             for(int j=i+1;j<nums.size();j++){
-                if(op.find(-nums[i]-nums[j])!=op.end() && j!=op.find(-nums[i]-nums[j])->second){
-                // vector<int> v;
-                // v.push_back(i);
-                // v.push_back(j);
-                // v.push_back(op.find(-nums[i]-nums[j])->second);
-                res.push_back({i,j,op.find(-nums[i]-nums[j])->second});
+                auto itr=op.upper_bound(-nums[i]-nums[j]);
+                    *itr--;
+                if(itr->second+1 < op.size() && j < itr->second ){
+                    
+               res.push_back({nums[i],nums[j],nums[itr->second]});
                 k++;    
             }
                 
             }
             
         }
-        return res;
+        set<set<int>> s;
+        for(auto itr=res.begin();itr!=res.end();itr++){
+            set<int> t;
+            for(auto itr1=itr->begin();itr1!=itr->end();itr1++){
+                t.insert(*itr1);
+            }
+            s.insert(t);    
+        }
+        // res.erase(res.begin(),res.end());
+        vector<vector<int>> ans(0);
+        for(auto itr=s.begin();itr!=s.end();itr++){
+            vector<int> t;
+            for(auto itr1=itr->begin();itr1!=itr->end();itr1++){
+                t.push_back(*itr1);
+            }
+            ans.push_back(t);    
+        }
+
+        return ans;
     }
 };
