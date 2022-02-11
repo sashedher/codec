@@ -1,12 +1,22 @@
 # Ignore Everything
 *
 
-# But not .cpp
+# But not .cpp  .txt  .h
 !*.cpp
+!*.txt
+!*.h
+!*.docx
+!*.pdf
+!*.c
+
+
 
 # Or directories
 !*/
 
+
+
+#git rm --cached "git ls-files -i --exclude-from=.gitignore     ->to get files ignored by .gitignore
 
 #git rm --cached filename   									->to remove staged file
 #git config --global core.excludesfile ~/.gitignore_global  	-> adding .gitignore to global config 
