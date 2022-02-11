@@ -16,7 +16,7 @@
 
 
 
-#git rm --cached "git ls-files -i --exclude-from=.gitignore     ->to get files ignored by .gitignore
+#git ls-files -i -c --exclude-from=.gitignore | xargs git rm --cached     ->to get files ignored by .gitignore
 
-#git rm --cached filename   									->to remove staged file
-#git config --global core.excludesfile ~/.gitignore_global  	-> adding .gitignore to global config 
+#git rm --cached filename   									          ->to remove staged file
+#git config --global core.excludesfile ~/.gitignore_global  	          -> adding .gitignore to global config 
