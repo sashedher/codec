@@ -1,6 +1,12 @@
-# ignore binary files and shared file
-*.exe
-*.so
+# Ignore Everything
+*
+
+# But not .cpp
+!*.cpp
+
+# Or directories
+!*/
+
 
 #git rm --cached filename   									->to remove staged file
 #git config --global core.excludesfile ~/.gitignore_global  	-> adding .gitignore to global config 
