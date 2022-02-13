@@ -7,13 +7,13 @@ using namespace std;
 class Solution {
 public:
     int reverse(int x) {
-        long long int rev=0,r=0,t;
+       int rev=0,r=0,t;
         t=abs(x);
         
       
         while(t>0){
             r=t%10;
-            if(rev<=mx/10) rev=rev*10+r;
+            if((long)rev*10<=mx) rev=rev*10+r;
             else return 0;
             t/=10;
             
