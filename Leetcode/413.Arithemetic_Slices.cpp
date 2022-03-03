@@ -8,7 +8,7 @@ class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& nums) {
         vector<int> l1,l2;
-        int c=0;
+        int c=0,s=0;
         if(nums.size()<3) return 0;
         for(int i=0;i<nums.size()-1;i++){
             l1.push_back(nums[i+1]-nums[i]);
@@ -17,9 +17,15 @@ public:
             l2.push_back(l1[i+1]-l1[i]);
         }
         for(int i=0;i<l2.size();i++){
-            if(l2[i]==0)
-                c+=1;
+            if(l2[i]==0)    c+=1;
+            else {
+                s=s+(c*(c+1))/2;
+                c=0;
+            }
         }
-        return (c*(c+1))/2;
+        
+        s=s+(c*(c+1))/2;
+        
+        return s;
     }
 };
