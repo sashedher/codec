@@ -13,7 +13,7 @@
 
 # Or directories
 !*/
-home/sashedher/Desktop/Coding/Scrap/
+Scrap/
 
 
 #git ls-files -i -c --exclude-from=.gitignore | xargs git rm --cached     ->to get files ignored by .gitignore
