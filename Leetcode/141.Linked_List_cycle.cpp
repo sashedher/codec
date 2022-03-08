@@ -13,13 +13,14 @@ using namespace std;
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        set<ListNode *> s; 
-        ListNode *t1=head;
-        s.insert(head);
-        while(t1){
+        ListNode *t2,*t1;
+        if(!head) return false;
+        t1=head;
+        t2=t1;
+        while(t2 && t2->next){
             t1=t1->next;
-            if(s.find(t1) != s.end()) return true;
-            s.insert(t1);
+            t2=t2->next->next;
+            if(t1==t2) return true;
             
         }
         return false;
