@@ -12,15 +12,23 @@ using namespace std;
  
 class Solution {
 public:
-    ListNode *detectCycle(ListNode *head) {
-       set<ListNode *> s; 
-        ListNode *t1=head;
-        s.insert(head);
-        while(t1){
+   ListNode *detectCycle(ListNode *head) {
+       ListNode *t2,*t1;
+        if(!head) return NULL;
+        t1=head;
+        t2=t1;
+        while(t2 && t2->next){
             t1=t1->next;
-            if(s.find(t1) != s.end()) return t1;
-            s.insert(t1);
+            t2=t2->next->next;
+            if(t1==t2) break;
             
+        }
+        if(!t2  || !t2->next) return NULL;
+        t1=head;
+        while(t1){
+            if(t1==t2) return t1;
+            t1=t1->next;
+            t2=t2->next;
         }
         return NULL;
         
