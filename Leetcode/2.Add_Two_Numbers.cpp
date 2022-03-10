@@ -16,62 +16,25 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode *t1=l1,*t2=l2,*head;
-        int c=0,s=0;
+        int c=0,s=0,x=0,y=0;
         
         ListNode *p1=new ListNode(0,nullptr);
         head=p1;
-        while(t1 && t2){
+        while((t1 || t2)  || c!=0){
+            x=!t1?0:t1->val;
+            y=!t2?0:t2->val;
             
             ListNode *p2=new ListNode(0,nullptr);
             p1->next=p2;
             p1=p2;
             
-            s=t1->val+t2->val+c;
+            s=x+y+c;
             c=s/10;
             s%=10;
             p1->val=s;
-            t1=t1->next;
-            t2=t2->next;
+            t1=t1?t1->next:nullptr;
+            t2=t2?t2->next:nullptr;
            
-            
-        }
-        if(t1){
-            while(t1){
-                
-                ListNode *p2=new ListNode(0,nullptr);
-                p1->next=p2;
-                p1=p2;
-                
-                s=t1->val+c;
-                c=s/10;
-                s%=10;
-                p1->val=s;
-                t1=t1->next;
-                
-            }
-        }
-         if(t2){
-            while(t2){
-                
-                ListNode *p2=new ListNode(0,nullptr);
-                p1->next=p2;
-                p1=p2;
-                
-                
-                s=t2->val+c;
-                c=s/10;
-                s%=10;
-                p1->val=s;
-                t2=t2->next;
-               
-            }
-        }
-        if(c>0) {
-             ListNode *p2=new ListNode(0,nullptr);
-                p1->next=p2;
-                p1=p2;
-                
-                p1->val=c;
             
         }
         
