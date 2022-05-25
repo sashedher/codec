@@ -16,40 +16,29 @@ struct TreeNode {
 
 class Solution {
 public:
-    
-    int BintoDec(string x){
-        int n=x.length(),p=1,res=0;
-        for(int i=n-1;i>=0;i--){
-            res=res+p*(x[i]-'0');                       //change to int;
-            p=p*2;
-        }
-        cout<<x<<" "<<res<<endl;
-        return res;
-    }
-    
-    
     int sumRootToLeaf(TreeNode* root) {
         int sum=0;
-        queue<pair<TreeNode*,string>> q;
-        string tp="";
-        tp.push_back(root->val+'0');
-        q.push({root,tp});
+        queue<pair<TreeNode*,int>> q;
+        
+        q.push({root,0});
         while(!q.empty()){
-            pair<TreeNode*,string> t=q.front();
+            pair<TreeNode*,int> t=q.front();
             q.pop();
+            int x=t.first->val+t.second;
+            // cout<<x<<" "<<t.first->val<<endl;
+            
             if(t.first){
-                if(!t.first->left && !t.first->right){
-                    sum=sum+BintoDec(t.second);
+                if(!t.first->left && !t.first->right){          //count sum pn leaf nodes
+                    sum=sum+x;
+                    // cout<<x<<endl;
                 }
                if(t.first->left){
-                   string temp=t.second;
-                   temp.push_back((t.first->left->val+'0'));
-                   q.push({t.first->left,temp});
+                   
+                   q.push({t.first->left,x<<1});            //when level changes left shift x val
                } 
                if(t.first->right){
-                   string temp=t.second;
-                   temp.push_back(t.first->right->val+'0');
-                   q.push({t.first->right,temp});
+                   
+                   q.push({t.first->right,x<<1});            //when level changes left shift x val
                } 
             }
             
