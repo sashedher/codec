@@ -5,18 +5,24 @@ using namespace std;
  
 class Solution{
     int solve(vector<int> &A, int B) {
-        vector<vector<int>> t(A.size()+1,vector<int>(B+1,0));
-        for(int i=0;i<=A.size();i++){
-            t[i][0]=1;
-        }
-        for(int i=1;i<=A.size();i++){
+        int n=A.size();
+        vector<bool> curr(B+1,false);
+        vector<bool> prev(B+1,false);
+        curr[0]=true;
+        prev[0]=true;
+
+        for(int i=1;i<=n;i++){
             for(int j=1;j<=B;j++){
-                if(A[i-1]<=j){
-                    t[i][j]=t[i-1][j-A[i-1]] || t[i-1][j];
-                }
-                else t[i][j]=t[i-1][j];
+                if(A[i-1]<=j)
+                    curr[j]= prev[j-A[i-1]] || prev[j];
+                else
+                    curr[j]=prev[j];
             }
+            prev.clear();
+            prev=curr;
         }
-        return t[A.size()][B];
+
+
+        return curr[B];
     }
 };
