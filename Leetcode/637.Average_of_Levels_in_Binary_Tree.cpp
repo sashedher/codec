@@ -17,47 +17,32 @@ struct TreeNode {
 class Solution {
 public:
     vector<double> averageOfLevels(TreeNode* root) {
-        queue<pair<TreeNode*,int>> bfs;
-        vector<pair<int,int>> res;
-        int height=0;
+        queue<TreeNode*> q;
+        vector<double> res;
         
-        bfs.push({root,0});
-        while(!bfs.empty()){
-            pair<TreeNode*,int> t=bfs.front();
-            bfs.pop();
-            if(t.first){
-                res.push_back({t.first->val,t.second});
-                bfs.push({t.first->left,t.second+1});
-                bfs.push({t.first->right,t.second+1});
-                height=max(height,t.second+1);
+        q.push(root);
+        while(!q.empty()){
+            int n=q.size();
+        
+            vector<int> tp;
+            while(n--){
+                TreeNode* t=q.front();
+                q.pop();
+                if(t){
+                    tp.push_back(t->val);
+                    q.push(t->left);
+                    q.push(t->right);
+                }
             }
-            
+            if(tp.size()>0){
+                long long int sum=0;
+                sum=accumulate(tp.begin(),tp.end(),sum);
+                double x=(double)sum/tp.size();
+                res.push_back(x);
+            }
+                
         }
-        
-        
-        // for(int i=0;i<res.size();i++){
-        //     cout<<res[i].first<<" "<<res[i].second<<endl;
-        // }
-        // cout<<height;
-        
-        vector<vector<int>> ans(height);
-        for(int i=0;i<res.size();i++){
-            ans[res[i].second].push_back(res[i].first);
-            
-        }
-        res.clear();
-        
-        vector<double> result;
-        for(int i=0;i<ans.size();i++){
-            double temp=0;
-            long long int sum=0;
-            sum=accumulate(ans[i].begin(),ans[i].end(),static_cast<long long int>(0));     
-            temp=sum*1.0/ans[i].size();
-            result.push_back(temp);
-        }
-        
-        
-        return result;
+        return res;
         
     }
 };
