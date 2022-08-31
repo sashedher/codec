@@ -13,11 +13,11 @@ public:
           else return s[i]=='F';
         }
         if(ck=='T'){
-            if(dp[1][i][j]!=-1) return dp[1][201][201];
+            if(dp[1][i][j]!=-1) return dp[1][i][j];
             
         }
         else{
-            if(dp[0][i][j]!=-1) return dp[0][201][201];
+            if(dp[0][i][j]!=-1) return dp[0][i][j];
         }
         
         int ans=0;
