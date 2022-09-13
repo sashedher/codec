@@ -14,6 +14,7 @@
 # Or directories
 !*/
 Scrap/
+Scrap_Practice_codes/
 
 
 #git ls-files -i -c --exclude-from=.gitignore | xargs git rm --cached     ->to get files ignored by .gitignore
