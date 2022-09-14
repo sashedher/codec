@@ -6,9 +6,6 @@ using namespace std;
 class Solution {
 public:
     bool isPowerOfTwo(int n) {
-        bitset<sizeof(int)*8+1> x(n);
-        if(x.count()==1) return true;
-        else return false;
-        
+        return ( n&(n-1) )==0;
     }
 };
