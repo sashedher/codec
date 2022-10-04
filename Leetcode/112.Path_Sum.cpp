@@ -22,16 +22,17 @@ public:
         
         queue<pair<TreeNode*,int>> q;
         
-        q.push({root,root->val});
+        q.push({root,0});
         while(!q.empty()){
             pair<TreeNode*,int> t=q.front();
             q.pop();
             if(t.first){
+                t.second+=t.first->val;
                 if(!t.first->left && !t.first->right){
                     if(t.second==targetSum) return true;
                 }
-                if(t.first->left)   q.push({t.first->left,t.second+t.first->left->val});
-                if(t.first->right)  q.push({t.first->right,t.second+t.first->right->val});
+                q.push({t.first->left,t.second});
+                q.push({t.first->right,t.second});
                 
             }
             
