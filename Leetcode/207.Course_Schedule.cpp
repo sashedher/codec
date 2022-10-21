@@ -5,49 +5,35 @@ using namespace std;
 
 class Solution {
 public:
-    
-    
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         
-        vector<bool> vis(numCourses,false),dfsvis(numCourses,false);
         vector<vector<int>> adj(numCourses);
+        vector<int> deg(numCourses,0),res;
+        
         for(int i=0;i<prerequisites.size();i++){
             adj[ prerequisites[i][1] ].push_back(prerequisites[i][0]);
         }
         
         for(int i=0;i<numCourses;i++){
-            if(vis[i]==false){
-                
-                stack<int> st;
-                st.push(i);
-                
-                
-                while(!st.empty()){
-                    int t=st.top();
-                    
-                    if(!vis[t]){
-                        vis[t]=true;
-                        dfsvis[t]=true;
-                    }
-                    else{
-                        dfsvis[t]=false;
-                        st.pop();
-                    }
-                    
-                    for(int j=0;j<adj[t].size();j++){
-                        if( vis[ adj[t][j] ]==false ){
-                            st.push( adj[t][j] );
-
-                        }
-                        else if(dfsvis[ adj[t][j] ] ) return false;
-                    }
-
-                    
-                }
-                        
-            }
-        }
+	        for(int j=0;j<adj[i].size();j++){
+	            deg[ adj[i][j] ]++;
+	        }
+	    }
         
-        return true;       
+        queue<int> q;
+	    for(int i=0;i<numCourses;i++){
+	        if(deg[i]==0) q.push(i);
+	    }
+	    while(!q.empty()){
+	        int t= q.front();
+	        q.pop();
+	        res.push_back(t);
+	        for(int i=0;i<adj[t].size();i++){
+	            deg[adj[t][i]]--;
+	            if( deg[ adj[t][i] ] ==0 ) q.push(adj[t][i]);
+	        }
+	        
+	    }
+	    return res.size()==numCourses;
     }
 };
